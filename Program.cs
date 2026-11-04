@@ -43,9 +43,10 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseMiddleware<Middleware>();
 
 app.UseHttpsRedirection();
+
+app.UseMiddleware<Middleware>();
 
 app.UseRateLimiter();
 
