@@ -48,4 +48,6 @@ app.UseRateLimiter();
 
 app.MapNotification();
 
+app.MapGet("/health", () => Results.Ok(new { status = "ok", timestamp = DateTime.UtcNow, version = "1.0.0" , appName = "SendNotificationAPI" }));
+
 app.Run();
