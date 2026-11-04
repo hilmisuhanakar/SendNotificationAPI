@@ -15,13 +15,6 @@ namespace SendNotificationAPI.EndPoints
         {
             var group = app.MapGroup("/notification");
 
-            group.MapGet("/", HealthCheck)
-            .Produces(StatusCodes.Status200OK)
-            .Produces(StatusCodes.Status400BadRequest)
-            .Produces(StatusCodes.Status500InternalServerError)
-            .WithTags("Notification")
-            .RequireRateLimiting("notification");
-
             group.MapPost("/mail", SendMailNotification)
             .DisableAntiforgery()
             .Accepts<SendMailNotificationRequest>("application/json")
@@ -32,17 +25,6 @@ namespace SendNotificationAPI.EndPoints
             .RequireRateLimiting("notification");
 
             return app;
-        }
-
-        private static async Task<IResult> HealthCheck([FromKeyedServices(NotificationType.Mail)] INotificationService<SendMailNotificationRequest> notificationService)
-        {
-            await notificationService.SendNotificationAsync(new SendMailNotificationRequest
-            {
-                Subject = "Health Check",
-                Body = "Health Check",
-                Recipients = new[] { "test@test.com" },
-            });
-            return Results.Ok();
         }
 
         private static async Task<IResult> SendMailNotification(SendMailNotificationRequest request, [FromKeyedServices(NotificationType.Mail)] INotificationService<SendMailNotificationRequest> notificationService)
