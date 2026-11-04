@@ -1,0 +1,29 @@
+# Build çıktıları
+**/bin/
+**/obj/
+
+# Test projesi
+Tests/
+
+# Gizli/yerel yapılandırma
+.env
+**/.env
+appsettings.Development.json
+
+# Git ve editör dosyaları
+.git/
+.gitignore
+.vscode/
+.vs/
+*.user
+*.suo
+
+# Docker dosyaları
+Dockerfile*
+.dockerignore
+docker-compose*
+
+# Diğer
+Readme.md
+*.http
+Properties/launchSettings.json
