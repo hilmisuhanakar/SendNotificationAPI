@@ -1,6 +1,7 @@
 using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.RateLimiting;
 using Microsoft.Extensions.Options;
+using SendNotificationAPI;
 using SendNotificationAPI.EndPoints;
 using SendNotificationAPI.Enums;
 using SendNotificationAPI.Models.Options;
@@ -41,6 +42,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseMiddleware<Middleware>();
 
 app.UseHttpsRedirection();
 
