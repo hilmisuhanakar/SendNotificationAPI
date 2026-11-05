@@ -11,9 +11,12 @@ namespace SendNotificationAPI.Models.RequestModel
     {
         [Required(ErrorMessage = "Subject is required")]
         public string Subject { get; set; } = null!;
+
         [Required(ErrorMessage = "Body is required")]
         public string Body { get; set; } = null!;
+
         [Required(ErrorMessage = "Recipients is required")]
+        
         public string[] Recipients { get; set; } = null!;
         public string[]? CC { get; set; }
         public string[]? BCC { get; set; }

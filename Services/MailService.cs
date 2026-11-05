@@ -17,6 +17,16 @@ namespace SendNotificationAPI.Services
 
         public async Task SendNotificationAsync(SendMailNotificationRequest request)
         {
+            if (request == null)
+            {
+                throw new ArgumentNullException(nameof(request));
+            }
+
+            if (string.IsNullOrEmpty(request.Subject) || string.IsNullOrEmpty(request.Body) || request.Recipients == null || request.Recipients.Length == 0)
+            {
+                throw new ArgumentException("Subject, Body, and Recipients are required");
+            }
+
             using var smtpClient = new SmtpClient(_smtpOptions.Host, _smtpOptions.Port)
             {
                 Credentials = new NetworkCredential(_smtpOptions.Username, _smtpOptions.Password),
